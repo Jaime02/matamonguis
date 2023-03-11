@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        <link rel="stylesheet" href="styles.css" />
+
+        <script src="js/game.js" type="module" defer></script>
+        <script src="js/web.js" type="module" defer></script>
+
+        <!-- Favicon -->
+        <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
+        <link rel="manifest" href="favicon/site.webmanifest">
+        <link rel="mask-icon" href="favicon/safari-pinned-tab.svg" color="#5bbad5">
+        <meta name="msapplication-TileColor" content="#da532c">
+        <meta name="theme-color" content="#ffffff">
+        
+        <!-- Fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet" />
+
+        <title>Matamonguis!</title>
+    </head>
+
+    <body>
+        <img style="display: none" id="player" src="img/player.png" />
+        <img style="display: none" id="wart" src="img/wart.png" />
+        <img style="display: none" id="coin" src="img/coin.webp" />
+
+        <main>
+            <div id="layoutMain">
+                <h1>Matamonguis!</h1>
+                <h2>¡Utiliza a Matamonguis para eliminar las verrugas!</h2>
+
+                <div id="flexRow">
+                    <label id="labelLevel" class="labelGameInfo">Nivel: 1</label>
+                    <label id="labelScore" class="labelGameInfo">Puntos: 0</label>
+                    <label id="labelLives" class="labelGameInfo">Vidas: ♥️♥️♥️</label>
+                    <label id="labelSpeed" class="labelGameInfo">Velocidad: 0 m/s</label>
+                    <label id="labelAcceleration" class="labelGameInfo">Aceleración: 0.1 m/s²</label>
+                </div>
+
+                <div id="divGame">
+                    <button id="buttonPlay">Jugar!</button>
+
+                    <canvas id="canvas">
+                        <p>This browser does not support canvas</p>
+                    </canvas>
+                </div>
+
+                <div id="flexRow">
+                    <button id="buttonReset">Resetear</button>
+                    <button id="buttonViewControls">Ver controles</button>
+                    <input id="checkboxAudio" type="checkbox" checked /> <label for="checkboxAudio">Audio</label>
+                </div>
+            </div>
+        </main>
+
+        <ul id="listControls" style="display: none">
+            <li>Flecha arriba: Incrementar velocidad vertical hacia arriba</li>
+            <li>Flecha abajo: Incrementar velocidad vertical hacia abajo</li>
+            <li>Flecha izquierda o derecha: Fijar velocidad vertical</li>
+            <li>Barra espaciadora: Pausa/Reanudar</li>
+        </ul>
+
+        <!-- Game over modal dialog -->
+        <div id="modalGameOver" class="modal">
+            <!-- Modal content -->
+            <div class="modalContent">
+                <span id="buttonCloseModal">&times;</span>
+
+                <div class="flexModal">
+                    <h2>Fin del juego!</h2>
+                    <label id="labelLevelReached">Nivel alcanzado:</label>
+                    <label id="labelScoreReached">Puntuación:</label>
+                    <label id="labelMaxSpeedReached">Velocidad máxima alcanzada:</label>
+                    <label id="labelMaxAccelerationReached">Aceleración alcanzada:</label>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
