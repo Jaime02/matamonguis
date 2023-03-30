@@ -1,5 +1,5 @@
 import { Sprite } from "./sprite.js";
-import { setScore, setLives, setSpeed, setLevel, setAcceleration, showModalGameOver } from "./web.js";
+import { setScore, setLives, setSpeed, setLevel, setAcceleration, showModalGameOver, reloadHighScores, closeModal } from "./web.js";
 
 var player = new Sprite("player", 150, 40);
 var wart = new Sprite("wart", 50, 50);
@@ -7,8 +7,12 @@ var coin = new Sprite("coin", 50, 50);
 
 var canvas = document.getElementById("canvas");
 var ctx = canvas.getContext("2d");
+var canvasParent = document.getElementById("divGame");
 
 var buttonPlay = document.getElementById("buttonPlay");
+var buttonReset = document.getElementById("buttonReset");
+var inputName = document.getElementById("inputName");
+var buttonSaveScore = document.getElementById("buttonSaveScore");
 
 var checkboxAudio = document.getElementById("checkboxAudio");
 var audioNextLevel = new Audio("audio/nextLevel.mp3");
@@ -24,7 +28,7 @@ var lives = 3;
 var acceleration = 0.1;
 var maxSpeed = 0;
 
-function reset() {
+export function reset() {
     pauseGame();
 
     level = 1;
@@ -92,7 +96,7 @@ function update() {
     }
 
     if (player.x + player.width >= canvas.width) {
-        if (Math.abs(player.y - wart.y) < wart.height / 2) {
+        if (Math.abs(player.y - wart.y) < wart.height / 2 + 5 + Math.floor(level / 2) * 4 ) {
             nextLevel();
         } else {
             if (checkboxAudio.checked) {
@@ -166,8 +170,6 @@ function gameOver() {
     document.getElementById(
         "labelMaxAccelerationReached"
     ).innerHTML = `Aceleración máxima alcanzada: ${acceleration} m/s²`;
-
-    reset();
 }
 
 function nextLevel() {
@@ -191,7 +193,6 @@ function nextLevel() {
     }
 }
 
-let buttonReset = document.getElementById("buttonReset");
 buttonReset.addEventListener("mousedown", reset);
 buttonReset.addEventListener("click", reset);
 
@@ -206,7 +207,9 @@ document.addEventListener("keydown", function (event) {
         } else {
             resumeGame();
         }
+        event.preventDefault();
     }
+
     if (!gameRunning) {
         return;
     }
@@ -224,8 +227,6 @@ document.addEventListener("keydown", function (event) {
     }
 });
 
-var canvasParent = document.getElementById("divGame");
-
 function fitCanvas() {
     canvas.width = canvasParent.clientWidth;
     canvas.height = canvasParent.clientHeight;
@@ -237,6 +238,49 @@ function fitCanvas() {
     resetSprites();
     draw();
 }
+
+function storeScore(name, score, level, maxSpeed, acceleration) {
+    let scores = JSON.parse(localStorage.getItem("highScores"));
+    if (scores == null) {
+        scores = [];
+    }
+
+    scores.push({
+        name: name,
+        score: score,
+        level: level,
+        maxSpeed: maxSpeed,
+        acceleration: acceleration,
+    });
+
+    scores.sort(function (a, b) {
+        return b.score - a.score;
+    });
+
+    if (scores.length > 10) {
+        scores = scores.slice(0, 10);
+    }
+
+    localStorage.setItem("highScores", JSON.stringify(scores));
+
+    reloadHighScores();
+}
+
+inputName.addEventListener("keydown", function (event) {
+    if (event.key == "Enter") {
+        buttonSaveScore.click();
+    }
+});
+
+buttonSaveScore.addEventListener("click", function () {
+    let name = inputName.value;
+    if (name == "") {
+        console.log("No name");
+        return;
+    }
+    storeScore(name, score, level, maxSpeed, acceleration);
+    closeModal();
+});
 
 window.onload = function () {
     reset();

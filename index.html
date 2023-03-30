@@ -46,40 +46,52 @@
                 </div>
 
                 <div id="divGame">
-                    <button id="buttonPlay">Jugar!</button>
-
+                    <button id="buttonPlay">Jugar</button>
                     <canvas id="canvas">
-                        <p>This browser does not support canvas</p>
+                        <p>Este navegador no soporta canvas</p>
                     </canvas>
                 </div>
 
                 <div id="flexRow">
                     <button id="buttonReset">Resetear</button>
                     <button id="buttonViewControls">Ver controles</button>
+                    <button id="buttonViewHighScores">Ver puntuaciones</button>
                     <input id="checkboxAudio" type="checkbox" checked /> <label for="checkboxAudio">Audio</label>
+                </div>
+
+                <ul id="listControls" style="display: none">
+                    <li>Flecha arriba: Incrementar velocidad vertical hacia arriba</li>
+                    <li>Flecha abajo: Incrementar velocidad vertical hacia abajo</li>
+                    <li>Flecha izquierda o derecha: Fijar velocidad vertical</li>
+                    <li>Barra espaciadora: Pausa/Reanudar</li>
+                </ul>
+    
+                <div id="divHighScores" style="display: none;">
+                    <h2>Top 10 puntuaciones</h2>
+                    <div id="tableHighScores">
+                        <label>Nombre</label>
+                        <label>Puntuación</label>
+                        <label>Nivel</label>
+                        <label>Velocidad</label>
+                        <label>Aceleración</label>
+                    </div>
                 </div>
             </div>
         </main>
-
-        <ul id="listControls" style="display: none">
-            <li>Flecha arriba: Incrementar velocidad vertical hacia arriba</li>
-            <li>Flecha abajo: Incrementar velocidad vertical hacia abajo</li>
-            <li>Flecha izquierda o derecha: Fijar velocidad vertical</li>
-            <li>Barra espaciadora: Pausa/Reanudar</li>
-        </ul>
 
         <!-- Game over modal dialog -->
         <div id="modalGameOver" class="modal">
             <!-- Modal content -->
             <div class="modalContent">
                 <span id="buttonCloseModal">&times;</span>
-
                 <div class="flexModal">
                     <h2>Fin del juego!</h2>
                     <label id="labelLevelReached">Nivel alcanzado:</label>
                     <label id="labelScoreReached">Puntuación:</label>
                     <label id="labelMaxSpeedReached">Velocidad máxima alcanzada:</label>
                     <label id="labelMaxAccelerationReached">Aceleración alcanzada:</label>
+                    <input id="inputName" maxlength="10" type="text" placeholder="Nombre" />
+                    <button id="buttonSaveScore">Guardar puntuación</button>
                 </div>
             </div>
         </div>

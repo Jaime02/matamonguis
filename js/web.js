@@ -1,9 +1,16 @@
+import { reset } from "./game.js";
+
 var buttonViewControls = document.getElementById("buttonViewControls");
+var buttonViewHighScores = document.getElementById("buttonViewHighScores");
 var listControls = document.getElementById("listControls");
+var divHighScores = document.getElementById("divHighScores");
+let tableHighScores = document.getElementById("tableHighScores");
 
 var labelScore = document.getElementById("labelScore");
 var labelLives = document.getElementById("labelLives");
 var labelLevel = document.getElementById("labelLevel");
+var labelSpeed = document.getElementById("labelSpeed");
+var labelAcceleration = document.getElementById("labelAcceleration");
 
 buttonViewControls.addEventListener("click", function () {
   if (listControls.style.display == "block") {
@@ -12,6 +19,19 @@ buttonViewControls.addEventListener("click", function () {
   } else {
     listControls.style.display = "block";
     buttonViewControls.innerHTML = "Ocultar controles";
+    // Scroll to bottom
+    window.scrollTo(0, document.body.scrollHeight);
+  }
+});
+
+buttonViewHighScores.addEventListener("click", function () {  
+  if (divHighScores.style.display == "block") {
+    divHighScores.style.display = "none";
+    buttonViewHighScores.innerHTML = "Ver puntuaciones";
+  } else {
+    reloadHighScores();
+    divHighScores.style.display = "block";
+    buttonViewHighScores.innerHTML = "Ocultar puntuaciones";
     // Scroll to bottom
     window.scrollTo(0, document.body.scrollHeight);
   }
@@ -41,7 +61,7 @@ export function setLives(lives) {
 }
 
 export function setSpeed(speed) {
-  speed = Math.round(speed * 100) / 100;
+  speed = Math.round(speed * 10) / 10;
 
   let low = 15;
   let medium = 30;
@@ -69,10 +89,47 @@ export function showModalGameOver() {
     modalGameOver.style.display = "block";
 };
 
-buttonCloseModal.onclick = () => {
-    modalGameOver.style.display = "none";
-};
+buttonCloseModal.onclick = closeModal;
 
+export function closeModal() {
+    modalGameOver.style.display = "none";
+    reset();
+}
+
+export function reloadHighScores() {
+    let highScores = JSON.parse(localStorage.getItem("highScores"));
+
+    tableHighScores.innerHTML = `
+    <label>Nombre</label>
+    <label>Puntuación</label>
+    <label>Nivel</label>
+    <label>Velocidad</label>
+    <label>Aceleración</label>`;
+
+    if (!highScores) {
+      return;
+    }
+
+    highScores.sort((a, b) => b.score - a.score);
+
+    for (let i = 0; i < highScores.length; i++) {
+        let cellName = tableHighScores.appendChild(document.createElement("label"));
+        cellName.innerHTML = highScores[i].name;
+
+        let cellScore = tableHighScores.appendChild(document.createElement("label"));
+        cellScore.innerHTML = highScores[i].score;
+
+        let cellLevel = tableHighScores.appendChild(document.createElement("label"));
+        cellLevel.innerHTML = highScores[i].level;
+
+        let cellMaxSpeed = tableHighScores.appendChild(document.createElement("label"));
+        cellMaxSpeed.innerHTML = highScores[i].maxSpeed;
+
+        let cellAcceleration = tableHighScores.appendChild(document.createElement("label"));
+        cellAcceleration.innerHTML = highScores[i].acceleration;
+    }
+}
+ 
 // When the user clicks anywhere outside of the modal, close it
 window.onclick = (event) => {
   if (event.target == modalGameOver) {
