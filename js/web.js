@@ -11,6 +11,7 @@ var labelLives = document.getElementById("labelLives");
 var labelLevel = document.getElementById("labelLevel");
 var labelSpeed = document.getElementById("labelSpeed");
 var labelAcceleration = document.getElementById("labelAcceleration");
+var flexHearts = document.getElementById("flexHearts");
 
 buttonViewControls.addEventListener("click", function () {
   if (listControls.style.display == "block") {
@@ -45,19 +46,29 @@ export function setScore(score) {
   labelScore.innerHTML = `Puntos: ${score}`;
 }
 
-export function setLives(lives) {
-  let heart = "♥️";
-  let hearts = heart.repeat(lives);
-  labelLives.innerHTML = `Vidas: ${hearts}`;
+function showHearts(heartNumber) {
+  for (let i = 1; i <= heartNumber; i++) {
+    let heart = document.getElementById(`heart${i}`);
+    heart.style.display = "block";
+  }
 
+  for (let i = 3; i > heartNumber; i--) {
+    let heart = document.getElementById(`heart${i}`);
+    heart.style.display = "none";
+  }
+}
+
+export function setLives(lives) {
   if (lives == 1) {
     labelLives.style.color = "red";
-    labelLives.style.animation = "beat 0.4s infinite alternate";
-    labelLives.style.transformOrigin = "center";
+    flexHearts.style.animation = "beat 0.4s infinite alternate";
+    flexHearts.style.transformOrigin = "center";
   } else {
     labelLives.style.color = "white";
-    labelLives.style.animation = "none";
+    flexHearts.style.animation = "none";
   }
+
+  showHearts(lives);
 }
 
 export function setSpeed(speed) {

@@ -13,7 +13,7 @@ li {
 }
 
 h1 {
-  font-size: 3em;
+  font-size: 2.8em;
   background-color: darkblue;
   border-radius: 10px;
   padding-left: 15px;
@@ -24,10 +24,6 @@ h1, h2 {
   text-align: center;
 }
 
-button {
-  padding: 8px;
-}
-
 li {
   padding: 10px;
   text-align: center;
@@ -36,7 +32,6 @@ li {
 label, a {
   color: white;
   font-size: 1.5em;
-  margin: 0;
 }
 
 a {
@@ -61,7 +56,7 @@ a:hover {
   width: 80%;
   height: 500px;
   margin: 0 auto;
-  background-color: #000;
+  background-color: black;
   border: 3px solid blue;
   border-radius: 4px;
 }
@@ -86,30 +81,31 @@ a:hover {
 
 #listControls {
   list-style: none;
-  padding: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 10px;
+  padding-right: 10px;
   margin: 0;
+  border-radius: 10px;
+  background-color: rgb(50, 50, 50);
 }
 
 .flexRow {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  gap: 1em;
+  gap: 0.75em;
   align-items: center;
   justify-content: space-evenly;
 }
 
-.labelGameInfo {
-  font-size: 1.5em;
-}
-
 #labelSpeed {
-    width: 13rem;
+  width: 13rem;
 }
 
 @keyframes beat {
   to {
-    transform: scale(1.2);
+    transform: scale(1.15);
   }
 }
 
@@ -190,6 +186,7 @@ input[type="text"] {
 }
 
 button {
+  padding: 8px;
   border-radius: 5px;
   border: 2px solid #0033ff;
   background-color: #001772;
@@ -210,4 +207,18 @@ footer {
 
 input[type="checkbox"] {
   margin: 0;
+}
+
+.heart {
+  width: 2em;
+  height: 2em;
+  aspect-ratio: 1/1;
+}
+
+#flexHearts {
+  gap: 0.25em;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
 }

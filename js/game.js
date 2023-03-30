@@ -193,7 +193,7 @@ function nextLevel() {
     }
 }
 
-buttonReset.addEventListener("mousedown", reset);
+buttonReset.addEventListener("click", reset);
 buttonReset.addEventListener("click", reset);
 
 buttonPlay.addEventListener("click", resumeGame);
