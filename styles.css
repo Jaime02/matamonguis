@@ -21,7 +21,7 @@ h1 {
 }
 
 h1, h2 {
-    text-align: center;
+  text-align: center;
 }
 
 button {
@@ -33,10 +33,18 @@ li {
   text-align: center;
 }
 
-label {
+label, a {
   color: white;
   font-size: 1.5em;
   margin: 0;
+}
+
+a {
+  color: #6b89ff;
+}
+
+a:hover {
+  color: #0033ff;
 }
 
 #layoutMain {
@@ -82,7 +90,7 @@ label {
   margin: 0;
 }
 
-#flexRow {
+.flexRow {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -172,12 +180,12 @@ label {
   background-color: rgb(51, 51, 51);
 }
 
-input {
+input[type="text"] {
   padding: 5px;
   border-radius: 5px;
   border: 2px solid #0033ff;
-  background-color: #001e98;
-  color: white;
+  background-color: #ffffff;
+  color: rgb(0, 0, 71);
   font-size: 1.5em;
 }
 
@@ -188,4 +196,18 @@ button {
   color: white;
   font-size: 1.2rem;
   cursor: pointer;
+}
+
+button:hover {
+  background-color: #0033ff;
+  border: 2px solid #a0b3ff;
+}
+
+footer {
+  padding: 1rem;
+  text-align: center;
+}
+
+input[type="checkbox"] {
+  margin: 0;
 }

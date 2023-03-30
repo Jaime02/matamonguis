@@ -37,7 +37,7 @@
                 <h1>Matamonguis!</h1>
                 <h2>¡Utiliza a Matamonguis para eliminar las verrugas!</h2>
 
-                <div id="flexRow">
+                <div class="flexRow">
                     <label id="labelLevel" class="labelGameInfo">Nivel: 1</label>
                     <label id="labelScore" class="labelGameInfo">Puntos: 0</label>
                     <label id="labelLives" class="labelGameInfo">Vidas: ♥️♥️♥️</label>
@@ -52,11 +52,14 @@
                     </canvas>
                 </div>
 
-                <div id="flexRow">
+                <div class="flexRow">
                     <button id="buttonReset">Resetear</button>
                     <button id="buttonViewControls">Ver controles</button>
                     <button id="buttonViewHighScores">Ver puntuaciones</button>
-                    <input id="checkboxAudio" type="checkbox" checked /> <label for="checkboxAudio">Audio</label>
+                    <div class="flexRow" style="gap: 0.5rem;">
+                        <input id="checkboxAudio" type="checkbox" checked /> 
+                        <label for="checkboxAudio">Audio</label>
+                    </div>
                 </div>
 
                 <ul id="listControls" style="display: none">
@@ -95,5 +98,10 @@
                 </div>
             </div>
         </div>
+
+        <footer>
+            <label>Autor: Jaime Resano - </label>
+            <a href="https://github.com/Jaime02/matamonguis">Link al código fuente</a>
+        </footer>
     </body>
 </html>
